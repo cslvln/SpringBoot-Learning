@@ -35,8 +35,13 @@ public class UserController {
         return "success";
     }
 
+    /**
+     * 使用@PathVariable注解的参数，要在@ApiImplicitParam中设置paramType = "path"，不然会对值进行转义放在url上。
+     * @param id
+     * @return
+     */
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType="path", dataType = "Long")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public User getUser(@PathVariable Long id) {
         return users.get(id);
